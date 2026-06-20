@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic Needs</title>
+
+<style>
+/* BODY */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#e0f7fa,#e8f5e9);
+}
+
+/* TOPBAR */
+.topbar{
+  background:linear-gradient(90deg,#43cea2,#185a9d);
+  color:white;
+  padding:18px 20px;
+  font-size:22px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  position:sticky;
+  top:0;
+}
+
+/* BACK BUTTON */
+.backBtn{
+  padding:10px 22px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff512f,#f09819);
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* SEARCH BAR */
+.searchBar{
+  flex:1;
+  padding:10px 18px;
+  border-radius:30px;
+  border:none;
+  font-size:15px;
+  outline:none;
+  margin-left:10px;
+}
+
+/* CONTAINER */
+.container{
+  max-width:520px;
+  margin:30px auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  padding:0 10px;
+}
+
+/* CARDS */
+.card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-radius:20px;
+  background:white;
+  font-size:18px;
+  font-weight:600;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+  cursor:pointer;
+  transition:.2s;
+}
+.card:hover{
+  transform:scale(1.03);
+}
+
+/* ICON BUTTON */
+.card .iconBtn{
+  padding:10px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<button class="backBtn" id="back">⬅ Back</button>
+<span id="title">Basic Needs</span>
+<input type="text" class="searchBar" id="searchBox" placeholder="Search..." onkeyup="searchFunction()">
+</div>
+
+<div class="container">
+<div class="card"><span id="b1">💧 I want water</span><div class="iconBtn" onclick="speakText(b1.innerText)">🎤</div></div>
+<div class="card"><span id="b2">🍽 I am hungry</span><div class="iconBtn" onclick="speakText(b2.innerText)">🎤</div></div>
+<div class="card"><span id="b3">🥤 I am thirsty</span><div class="iconBtn" onclick="speakText(b3.innerText)">🎤</div></div>
+<div class="card"><span id="b4">🪑 I want to sit</span><div class="iconBtn" onclick="speakText(b4.innerText)">🎤</div></div>
+<div class="card"><span id="b5">🆘 I need help</span><div class="iconBtn" onclick="speakText(b5.innerText)">🎤</div></div>
+<div class="card"><span id="b6">😴 I am tired</span><div class="iconBtn" onclick="speakText(b6.innerText)">🎤</div></div>
+</div>
+
+<script>
+let voices=[];
+
+// Load voices when available
+speechSynthesis.onvoiceschanged = () => {
+  voices = speechSynthesis.getVoices();
+  console.log("Available voices:", voices);
+};
+
+function speakText(text){
+  speechSynthesis.cancel();
+
+  // Remove emojis before speaking
+  let cleanText = text.replace(/[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "").trim();
+
+  let u=new SpeechSynthesisUtterance(cleanText);
+  let lang=localStorage.getItem("selectedLanguage")||"en";
+
+  let selectedVoice = null;
+  if(lang==="hi"){
+    selectedVoice = voices.find(v => v.lang === "hi-IN");
+    u.lang = "hi-IN";
+  } else if(lang==="mr"){
+    selectedVoice = voices.find(v => v.lang === "mr-IN");
+    u.lang = "mr-IN";
+  } else {
+    selectedVoice = voices.find(v => v.lang === "en-US");
+    u.lang = "en-US";
+  }
+
+  if(selectedVoice){
+    u.voice = selectedVoice;
+  } else {
+    console.warn("No matching voice found for", u.lang);
+  }
+
+  speechSynthesis.speak(u);
+}
+
+function searchFunction(){
+  let input=document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll(".card").forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(input)?"flex":"none";
+  });
+}
+
+const text={
+ en:["Basic Needs","⬅ Back","💧 I want water","🍽 I am hungry","🥤 I am thirsty","🪑 I want to sit","🆘 I need help","😴 I am tired"],
+ hi:["मूल आवश्यकताएँ","⬅ वापस","💧 मुझे पानी चाहिए","🍽 मुझे भूख लगी है","🥤 मुझे प्यास लगी है","🪑 मुझे बैठना है","🆘 मुझे मदद चाहिए","😴 मैं थका हूँ"],
+ mr:["मूलभूत गरजा","⬅ मागे","💧 मला पाणी पाहिजे","🍽 मला भूक लागली आहे","🥤 मला तहान लागली आहे","🪑 मला बसायचे आहे","🆘 मला मदत हवी आहे","😴 मी थकलो आहे"]
+};
+
+function applyLang(lang){
+  document.getElementById("title").innerText = text[lang][0];
+  document.getElementById("back").innerText = text[lang][1];
+
+  const c=document.querySelectorAll(".card span");
+  for(let i=0;i<c.length;i++){
+    c[i].innerText = text[lang][i+2];
+  }
+}
+
+window.onload=()=>{
+  let lang=localStorage.getItem("selectedLanguage")||"en";
+  applyLang(lang);
+};
+
+document.getElementById("back").onclick=()=>location.href="communication.html";
+</script>
+
+</body>
+</html>

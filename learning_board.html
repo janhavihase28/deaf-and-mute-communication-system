@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Learning Board</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI, system-ui, Arial;
+background:radial-gradient(1200px 600px at 50% -10%, #eaf0ff 0%, #f1f4fb 45%, #eef2ff 100%);
+text-align:center;
+color:#0f172a;
+}
+
+.topbar{
+background:linear-gradient(90deg,#5f7cff,#6a8dff);
+color:white;
+padding:18px;
+font-size:26px;
+font-weight:800;
+position:relative;
+}
+
+.backBtn{
+position:absolute;
+left:10px;
+top:10px;
+padding:8px 18px;
+border:none;
+border-radius:999px;
+background:linear-gradient(135deg,#ff9a00,#ff5e62);
+color:white;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+}
+
+.container{
+min-height:70vh;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.card{
+padding:26px 56px;
+border-radius:999px;
+font-size:20px;
+font-weight:800;
+color:white;
+cursor:pointer;
+}
+
+.deaf{ background:linear-gradient(135deg,#ff9a00,#ffb347); }
+.mute{ background:linear-gradient(135deg,#00b09b,#1abc9c); }
+.practice{ background:linear-gradient(135deg,#667eea,#764ba2); }
+
+.videoSection{
+display:none;
+padding:20px;
+}
+
+.videoBox{
+background:white;
+padding:20px;
+border-radius:20px;
+max-width:1100px;
+margin:auto;
+position:relative;
+}
+
+.langBtns{
+margin:15px 0;
+}
+
+.langBtn{
+padding:8px 16px;
+border:none;
+border-radius:999px;
+margin:5px;
+font-weight:700;
+cursor:pointer;
+}
+
+.videoGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+gap:18px;
+}
+
+.videoCard{
+background:#0f172a;
+border-radius:16px;
+padding:10px;
+}
+
+.videoWrap{
+position:relative;
+border-radius:10px;
+overflow:hidden;
+aspect-ratio:16/9;
+}
+
+.videoWrap video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.videoInfo{
+color:white;
+margin-top:8px;
+font-size:14px;
+}
+
+.sectionBack{
+position:absolute;
+left:15px;
+top:15px;
+background:red;
+color:white;
+border:none;
+padding:6px 14px;
+border-radius:20px;
+font-size:14px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<span id="titleText">Learning Board</span>
+<button class="backBtn" onclick="goBack()">⬅</button>
+</div>
+
+<div class="container" id="mainBoard">
+<div class="card deaf" id="deafBtn" onclick="openDeaf()">👂 Deaf Learning</div>
+<div class="card mute" id="muteBtn" onclick="openMute()">🗣 Mute Learning</div>
+<div class="card practice" id="practiceBtn" onclick="openPractice()">✍ Practice Board</div>
+</div>
+
+
+<!-- DEAF SECTION -->
+
+<div class="videoSection" id="deafSection">
+
+<div class="videoBox">
+
+<button class="sectionBack" onclick="goHome()">⬅</button>
+
+<h2>👂 Deaf Learning Videos</h2>
+
+<div class="langBtns">
+<button class="langBtn" onclick="showDeafVideos('en')">English</button>
+<button class="langBtn" onclick="showDeafVideos('hi')">Hindi</button>
+<button class="langBtn" onclick="showDeafVideos('mr')">Marathi</button>
+</div>
+
+<div id="deaf-en">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="alphabet1.mp4">
+</video>
+</div>
+<div class="videoInfo">Alphabet</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="daysdef.mp4">
+</video>
+</div>
+<div class="videoInfo">Days</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="numbersdef.mp4">
+</video>
+</div>
+<div class="videoInfo">Numbers</div>
+</div>
+
+</div>
+</div>
+
+<div id="deaf-hi" style="display:none">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="signhindi.mp4">
+</video>
+</div>
+<div class="videoInfo">सांकेतिक भाषा</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="sign2.mp4">
+</video>
+</div>
+<div class="videoInfo">दैनिक वाक्य</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="sign3.mp4">
+</video>
+</div>
+<div class="videoInfo">अक्षरमाला</div>
+</div>
+
+</div>
+</div>
+
+<div id="deaf-mr" style="display:none">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="marathi11.mp4">
+</video>
+</div>
+<div class="videoInfo">मराठी अक्षरे</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="marathi12.mp4">
+</video>
+</div>
+<div class="videoInfo">दैनिक वाक्य</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<!-- MUTE SECTION -->
+
+<div class="videoSection" id="muteSection">
+
+<div class="videoBox">
+
+<button class="sectionBack" onclick="goHome()">⬅</button>
+
+<h2>🗣 Mute Learning Videos</h2>
+
+<div class="langBtns">
+<button class="langBtn" onclick="showMuteVideos('en')">English</button>
+<button class="langBtn" onclick="showMuteVideos('hi')">Hindi</button>
+<button class="langBtn" onclick="showMuteVideos('mr')">Marathi</button>
+</div>
+
+<div id="mute-en">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="alphabet1.mp4">
+</video>
+</div>
+<div class="videoInfo">Alphabet Pronunciation</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="daysdef.mp4">
+</video>
+</div>
+<div class="videoInfo">Days Pronunciation</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="numbersdef.mp4">
+</video>
+</div>
+<div class="videoInfo">Numbers Pronunciation</div>
+</div>
+
+</div>
+</div>
+
+<div id="mute-hi" style="display:none">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="signhindi.mp4">
+</video>
+</div>
+<div class="videoInfo">सांकेतिक भाषा</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="sign2.mp4">
+</video>
+</div>
+<div class="videoInfo">दैनिक वाक्य</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="sign3.mp4">
+</video>
+</div>
+<div class="videoInfo">अक्षरमाला</div>
+</div>
+
+</div>
+</div>
+
+<div id="mute-mr" style="display:none">
+<div class="videoGrid">
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="marathi11.mp4">
+</video>
+</div>
+<div class="videoInfo">मराठी अक्षरे</div>
+</div>
+
+<div class="videoCard">
+<div class="videoWrap">
+<video controls>
+<source src="marathi12.mp4">
+</video>
+</div>
+<div class="videoInfo">दैनिक वाक्य</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<script>
+
+function goBack(){
+location.href="dashboard.html"
+}
+
+function openPractice(){
+location.href="practice.html"
+}
+
+function openDeaf(){
+document.getElementById("mainBoard").style.display="none"
+document.getElementById("deafSection").style.display="block"
+}
+
+function openMute(){
+document.getElementById("mainBoard").style.display="none"
+document.getElementById("muteSection").style.display="block"
+}
+
+function goHome(){
+document.getElementById("mainBoard").style.display="flex"
+document.getElementById("deafSection").style.display="none"
+document.getElementById("muteSection").style.display="none"
+}
+
+function showDeafVideos(lang){
+["en","hi","mr"].forEach(l=>{
+document.getElementById("deaf-"+l).style.display="none"
+})
+document.getElementById("deaf-"+lang).style.display="block"
+}
+
+function showMuteVideos(lang){
+["en","hi","mr"].forEach(l=>{
+document.getElementById("mute-"+l).style.display="none"
+})
+document.getElementById("mute-"+lang).style.display="block"
+}
+
+window.onload=function(){
+
+let lang = localStorage.getItem("selectedLanguage") || "en"
+
+if(lang=="hi"){
+document.getElementById("titleText").innerText="लर्निंग बोर्ड"
+document.getElementById("deafBtn").innerText="👂 बधिर सीखना"
+document.getElementById("muteBtn").innerText="🗣 मूक सीखना"
+document.getElementById("practiceBtn").innerText="✍ अभ्यास बोर्ड"
+}
+
+if(lang=="mr"){
+document.getElementById("titleText").innerText="लर्निंग बोर्ड"
+document.getElementById("deafBtn").innerText="👂 बहिरा शिक्षण"
+document.getElementById("muteBtn").innerText="🗣 मुक शिक्षण"
+document.getElementById("practiceBtn").innerText="✍ सराव फलक"
+}
+
+}
+
+</script>
+
+</body>
+</html>

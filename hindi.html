@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>हिंदी अभ्यास</title>
+
+<style>
+body{
+font-family:Segoe UI;
+background:#f2f4ff;
+margin:0;
+text-align:center;
+}
+
+.topbar{
+background:#5f7cff;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+position:relative;
+}
+
+.backBtn{
+position:absolute;
+left:10px;
+top:10px;
+padding:8px 18px;
+border:none;
+border-radius:20px;
+background:#ff6b6b;
+color:white;
+cursor:pointer;
+}
+
+.question{
+background:white;
+margin:30px auto;
+padding:20px;
+width:80%;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.question img{
+width:300px;
+margin-top:15px;
+}
+
+.options button{
+margin:6px;
+padding:10px 18px;
+border:none;
+border-radius:8px;
+background:#5f7cff;
+color:white;
+cursor:pointer;
+}
+
+.result{
+margin-top:10px;
+font-weight:bold;
+font-size:18px;
+}
+
+#showBtn,#restartBtn{
+margin:20px;
+padding:14px 35px;
+font-size:20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+#showBtn{background:#5f7cff;color:white;}
+#restartBtn{background:#ff6b6b;color:white;}
+
+.resultBox{
+margin:40px auto;
+width:60%;
+background:white;
+padding:30px;
+border-radius:15px;
+font-size:28px;
+font-weight:bold;
+}
+
+.excellent{color:#2ecc71;}
+.good{color:#3498db;}
+.practice{color:#e74c3c;}
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+<button class="backBtn" onclick="goBack()">⬅</button>
+हिंदी अभ्यास
+</div>
+
+<!-- ✅ ALL 9 QUESTIONS -->
+
+<!-- (तू दिलेले exact same questions येथे add केले आहेत) -->
+
+<!-- Question 1 -->
+<div class="question">
+<h3>प्रश्न 1: यह संकेत क्या दर्शाता है?</h3>
+<img src="page1n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(1,false)">नमस्ते</button>
+<button onclick="checkAnswer(1,true)">धन्यवाद</button>
+<button onclick="checkAnswer(1,false)">माफ़ कीजिए</button>
+<button onclick="checkAnswer(1,false)">सुप्रभात</button>
+</div>
+<div class="result" id="result1"></div>
+</div>
+
+<!-- Question 2 -->
+<div class="question">
+<h3>प्रश्न 2: यह संकेत क्या दर्शाता है?</h3>
+<img src="page2n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(2,false)">क</button>
+<button onclick="checkAnswer(2,false)">ख</button>
+<button onclick="checkAnswer(2,true)">ग</button>
+<button onclick="checkAnswer(2,false)">घ</button>
+</div>
+<div class="result" id="result2"></div>
+</div>
+
+<!-- Question 3 -->
+<div class="question">
+<h3>प्रश्न 3: यह संकेत क्या दर्शाता है?</h3>
+<img src="page3n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(3,false)">बुरा</button>
+<button onclick="checkAnswer(3,true)">अच्छा</button>
+<button onclick="checkAnswer(3,false)">दुखी</button>
+<button onclick="checkAnswer(3,false)">खुश</button>
+</div>
+<div class="result" id="result3"></div>
+</div>
+
+<!-- Question 4 -->
+<div class="question">
+<h3>प्रश्न 4: यह संकेत क्या दर्शाता है?</h3>
+<img src="page4n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(4,false)">2</button>
+<button onclick="checkAnswer(4,false)">5</button>
+<button onclick="checkAnswer(4,true)">3</button>
+<button onclick="checkAnswer(4,false)">4</button>
+</div>
+<div class="result" id="result4"></div>
+</div>
+
+<!-- Question 5 -->
+<div class="question">
+<h3>प्रश्न 5: यह संकेत क्या दर्शाता है?</h3>
+<img src="page5n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(5,true)">अ</button>
+<button onclick="checkAnswer(5,false)">ब</button>
+<button onclick="checkAnswer(5,false)">स</button>
+<button onclick="checkAnswer(5,false)">द</button>
+</div>
+<div class="result" id="result5"></div>
+</div>
+
+<!-- Question 6 -->
+<div class="question">
+<h3>प्रश्न 6: यह संकेत क्या दर्शाता है?</h3>
+<img src="page6.jpeg">
+<div class="options">
+<button onclick="checkAnswer(6,false)">3</button>
+<button onclick="checkAnswer(6,false)">4</button>
+<button onclick="checkAnswer(6,true)">5</button>
+<button onclick="checkAnswer(6,false)">9</button>
+</div>
+<div class="result" id="result6"></div>
+</div>
+
+<!-- Question 7 -->
+<div class="question">
+<h3>प्रश्न 7: यह संकेत क्या दर्शाता है?</h3>
+<img src="page7.jpeg">
+<div class="options">
+<button onclick="checkAnswer(7,false)">2</button>
+<button onclick="checkAnswer(7,false)">4</button>
+<button onclick="checkAnswer(7,false)">9</button>
+<button onclick="checkAnswer(7,true)">8</button>
+</div>
+<div class="result" id="result7"></div>
+</div>
+
+<!-- Question 8 -->
+<div class="question">
+<h3>प्रश्न 8: यह संकेत क्या दर्शाता है?</h3>
+<img src="page8.jpeg">
+<div class="options">
+<button onclick="checkAnswer(8,true)">10</button>
+<button onclick="checkAnswer(8,false)">4</button>
+<button onclick="checkAnswer(8,false)">11</button>
+<button onclick="checkAnswer(8,false)">9</button>
+</div>
+<div class="result" id="result8"></div>
+</div>
+
+<!-- Question 9 -->
+<div class="question">
+<h3>प्रश्न 9: यह संकेत क्या दर्शाता है?</h3>
+<img src="page9.jpeg">
+<div class="options">
+<button onclick="checkAnswer(9,false)">3</button>
+<button onclick="checkAnswer(9,false)">4</button>
+<button onclick="checkAnswer(9,true)">1</button>
+<button onclick="checkAnswer(9,false)">9</button>
+</div>
+<div class="result" id="result9"></div>
+</div>
+
+<button id="showBtn" onclick="showResult()">परिणाम देखें</button>
+<button id="restartBtn" onclick="restartTest()">फिर से शुरू करें</button>
+
+<div id="finalResult" class="resultBox"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+let score=0
+let answered={}
+
+// SAVE TO DATABASE
+function saveResult(language, score){
+fetch("http://localhost/save_result.php", {
+method: "POST",
+headers: {"Content-Type": "application/x-www-form-urlencoded"},
+body: "language=" + language + "&score=" + score
+})
+}
+
+// BACK
+function goBack(){
+location.href="practice.html"
+}
+
+// CHECK
+function checkAnswer(q,isCorrect){
+if(answered[q]) return
+answered[q]=true
+
+let r=document.getElementById("result"+q)
+
+if(isCorrect){
+r.innerHTML="✅ सही उत्तर"
+r.style.color="green"
+score++
+}else{
+r.innerHTML="❌ गलत उत्तर"
+r.style.color="red"
+}
+}
+
+// RESULT
+function showResult(){
+
+let text=""
+let className=""
+
+if(score>=8){
+text="🌟 शानदार काम!"
+className="excellent"
+confetti()
+}
+else if(score>=5){
+text="👍 अच्छा प्रयास!"
+className="good"
+}
+else{
+text="📚 और अभ्यास करें!"
+className="practice"
+}
+
+let box=document.getElementById("finalResult")
+box.className="resultBox "+className
+box.innerHTML="आपका स्कोर: "+score+" / 9 <br><br>"+text
+
+// SAVE
+saveResult("Hindi", score)
+
+}
+
+// RESET
+function restartTest(){
+
+score=0
+answered={}
+
+document.getElementById("finalResult").innerHTML=""
+
+for(let i=1;i<=9;i++){
+let r=document.getElementById("result"+i)
+if(r) r.innerHTML=""
+}
+
+window.scrollTo(0,0)
+
+}
+
+</script>
+
+</body>
+</html>

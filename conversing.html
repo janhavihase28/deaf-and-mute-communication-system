@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Conversing Board</title>
+
+<style>
+body{
+    margin:0;
+    padding:30px;
+    font-family:Arial,sans-serif;
+    background:#eef3ff;
+}
+
+/* 🔹 Back Button Style - Left Corner Fixed */
+#backBtn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:linear-gradient(135deg,#e9340b,#ff766a);
+    color:white;
+    font-size:20px;
+    padding:12px 18px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    z-index:1000;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    transition:0.3s ease;
+}
+
+#backBtn:hover{
+    transform:scale(1.1);
+    box-shadow:0 10px 25px rgba(0,0,0,0.35);
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.input-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    padding:15px;
+    font-size:18px;
+    border-radius:12px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+#micBtn{
+    background:#ff5c5c;
+    color:white;
+}
+
+#speakBtn{
+    background:#4b6aff;
+    color:white;
+    width:100%;
+    margin-top:20px;
+}
+
+.active-mic{
+    background:#ff9b9b !important;
+}
+
+.title{
+    text-align:center;
+    color:#4b6aff;
+    margin-bottom:20px;
+    font-size:28px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔹 Back Button -->
+<button id="backBtn">⬅</button>
+
+<div class="title" id="title">💬 Conversing Board</div>
+
+<div class="container">
+    <div class="input-row">
+        <input type="text" id="textInput" placeholder="Type or speak your sentence...">
+        <button id="micBtn">🎤</button>
+    </div>
+
+    <button id="speakBtn">🔊 Speak This Sentence</button>
+</div>
+
+<script>
+
+const langText = {
+
+    en:{
+        title:"💬 Conversing Board",
+        placeholder:"Type or speak your sentence...",
+        speak:"🔊 Speak This Sentence",
+        alert:"Please type something!",
+        code:"en-US"
+    },
+
+    hi:{
+        title:"💬 वार्तालाप बोर्ड",
+        placeholder:"अपना वाक्य लिखें या बोलें...",
+        speak:"🔊 वाक्य बोलें",
+        alert:"कृपया कुछ लिखें!",
+        code:"hi-IN"
+    },
+
+    mr:{
+        title:"💬 संभाषण फलक",
+        placeholder:"तुमचा वाक्य टाइप करा किंवा बोला...",
+        speak:"🔊 वाक्य बोला",
+        alert:"कृपया काहीतरी लिहा!",
+        code:"mr-IN"
+    }
+
+};
+
+let selectedLang = localStorage.getItem("selectedLanguage") || "en";
+let current = langText[selectedLang];
+
+document.getElementById("title").innerText = current.title;
+document.getElementById("textInput").placeholder = current.placeholder;
+document.getElementById("speakBtn").innerText = current.speak;
+
+/* 🔹 Back Button Function - FIXED (Direct Page) */
+document.getElementById("backBtn").onclick = function(){
+    window.location.href = "dashboard.html";  // 👈 तुझ्या मागच्या page चं नाव इथे दे
+};
+
+// ---------- SPEAK BUTTON ----------
+document.getElementById("speakBtn").onclick = function(){
+
+    let text = document.getElementById("textInput").value;
+
+    if(!text.trim()){
+        alert(current.alert);
+        return;
+    }
+
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = current.code;
+    speech.rate = 1;
+    window.speechSynthesis.speak(speech);
+};
+
+// ---------- MIC RECOGNITION ----------
+let mic = document.getElementById("micBtn");
+let input = document.getElementById("textInput");
+let recognition;
+
+if("webkitSpeechRecognition" in window){
+
+    recognition = new webkitSpeechRecognition();
+    recognition.lang = current.code;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => mic.classList.add("active-mic");
+    recognition.onend = () => mic.classList.remove("active-mic");
+
+    recognition.onresult = function(e){
+        input.value = e.results[0][0].transcript;
+    };
+}
+
+mic.onclick = function(){
+
+    if(!recognition){
+        alert("Speech recognition not supported OR HTTPS required.");
+        return;
+    }
+
+    recognition.start();
+};
+
+</script>
+
+</body>
+</html>

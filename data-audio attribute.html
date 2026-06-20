@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Needs - Sound Enabled</title>
+
+    <style>
+        body { font-family: Arial; padding: 20px; background:#eef2f3; }
+        h2 { text-align:center; }
+        .phrase{
+            background:#ffffff;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 12px;
+            font-size: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+        .phrase:hover{ background:#d9ffe2; }
+    </style>
+</head>
+<body>
+
+<h2>🗣 Basic Needs (मूलभूत गरजा)</h2>
+
+<div class="phrase" data-audio="water">I want water — मला पाणी हवे</div>
+
+<!-- AUDIO FILE (तुझा real file इथे लावलेला आहे) -->
+<audio id="water" src="audio/water.mp3"></audio>
+
+<script>
+    document.querySelectorAll('.phrase').forEach(item => {
+        item.addEventListener('click', () => {
+            const audioId = item.getAttribute('data-audio');
+            const audioElement = document.getElementById(audioId);
+            if(audioElement){
+                audioElement.currentTime = 0;
+                audioElement.play();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communication</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#e0f7fa,#e8f5e9);
+}
+
+/* TOPBAR */
+.topbar{
+background:linear-gradient(90deg,#43cea2,#185a9d);
+color:white;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:700;
+position:relative;
+}
+
+/* BACK ARROW LEFT */
+.backBtn{
+position:absolute;
+left:20px;
+top:50%;
+transform:translateY(-50%);
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:white;
+color:#185a9d;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 6px 15px rgba(0,0,0,0.3);
+transition:0.2s;
+}
+.backBtn:hover{
+transform:translateY(-50%) scale(1.1);
+}
+
+/* CONTAINER */
+.container{
+max-width:520px;
+margin:40px auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:22px;
+}
+
+/* CARDS */
+.card{
+min-height:150px;
+border-radius:26px;
+font-size:20px;
+font-weight:700;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:0 10px 22px rgba(0,0,0,0.18);
+transition:.2s;
+}
+.card:hover{ transform:scale(1.05); }
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<button class="backBtn" id="back">⬅</button>
+<span id="title">Communication Board</span>
+</div>
+
+<div class="container">
+<div class="card" id="basic">🗣 Basic Needs</div>
+<div class="card" id="emo">😊 Emotions</div>
+<div class="card" id="food">🍎 Food & Drinks</div>
+<div class="card" id="home">🏠 Home</div>
+<div class="card" id="toilet">🚻 Toilet</div>
+<div class="card" id="medical">👨‍⚕ Medical</div>
+</div>
+
+<script>
+const t={
+en:{
+title:"Communication Board",
+basic:"🗣 Basic Needs",
+home:"🏠 Home",
+emo:"😊 Emotions",
+food:"🍎 Food & Drinks",
+toilet:"🚻 Toilet",
+medical:"👨‍⚕ Medical"
+},
+hi:{
+title:"संचार बोर्ड",
+basic:"🗣 मूल आवश्यकताएँ",
+home:"🏠 घर",
+emo:"😊 भावनाएँ",
+food:"🍎 भोजन",
+toilet:"🚻 शौचालय",
+medical:"👨‍⚕ चिकित्सा"
+},
+mr:{
+title:"संवाद फलक",
+basic:"🗣 मूलभूत गरजा",
+home:"🏠 घर",
+emo:"😊 भावना",
+food:"🍎 अन्न",
+toilet:"🚻 स्वच्छता",
+medical:"👨‍⚕ वैद्यकीय"
+}
+};
+
+function applyLang(lang){
+title.innerText=t[lang].title;
+basic.innerText=t[lang].basic;
+home.innerText=t[lang].home;
+emo.innerText=t[lang].emo;
+food.innerText=t[lang].food;
+toilet.innerText=t[lang].toilet;
+medical.innerText=t[lang].medical;
+}
+
+window.onload=()=>{
+let lang=localStorage.getItem("selectedLanguage")||"en";
+applyLang(lang);
+};
+
+// Navigation
+basic.onclick=()=>location.href="basic.html";
+home.onclick=()=>location.href="home.html";
+emo.onclick=()=>location.href="emotions.html";
+food.onclick=()=>location.href="food.html";
+toilet.onclick=()=>location.href="toilet.html";
+medical.onclick=()=>location.href="medical.html";
+
+// ✅ FIXED BACK BUTTON
+back.onclick = () => {
+  location.href = "dashboard.html";
+};
+</script>
+
+</body>
+</html>

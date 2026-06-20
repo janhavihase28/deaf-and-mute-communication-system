@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>English Practice</title>
+
+<style>
+body{
+font-family:Segoe UI;
+background:#f2f4ff;
+margin:0;
+text-align:center;
+}
+
+.topbar{
+background:#5f7cff;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+position:relative;
+}
+
+.backBtn{
+position:absolute;
+left:10px;
+top:10px;
+padding:8px 18px;
+border:none;
+border-radius:20px;
+background:#ff6b6b;
+color:white;
+cursor:pointer;
+}
+
+.question{
+background:white;
+margin:30px auto;
+padding:20px;
+width:80%;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.question img{
+width:300px;
+margin-top:15px;
+}
+
+.options button{
+margin:6px;
+padding:10px 18px;
+border:none;
+border-radius:8px;
+background:#5f7cff;
+color:white;
+cursor:pointer;
+}
+
+.result{
+margin-top:10px;
+font-weight:bold;
+}
+
+#showBtn,#restartBtn{
+margin:20px;
+padding:14px 35px;
+font-size:20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+#showBtn{background:#5f7cff;color:white;}
+#restartBtn{background:#ff6b6b;color:white;}
+
+.resultBox{
+margin:40px auto;
+width:60%;
+background:white;
+padding:30px;
+border-radius:15px;
+font-size:28px;
+font-weight:bold;
+}
+
+.excellent{color:#2ecc71;}
+.good{color:#3498db;}
+.practice{color:#e74c3c;}
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+<button class="backBtn" onclick="goBack()">⬅</button>
+English Practice
+</div>
+
+<!-- ALL QUESTIONS -->
+
+<div class="question">
+<h3>Question 1: What does this sign represent?</h3>
+<img src="page1n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(1,false)">Hello</button>
+<button onclick="checkAnswer(1,true)">Thank You</button>
+<button onclick="checkAnswer(1,false)">Sorry</button>
+<button onclick="checkAnswer(1,false)">Good Morning</button>
+</div>
+<div id="result1" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 2: What does this sign represent?</h3>
+<img src="page2n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(2,false)">D</button>
+<button onclick="checkAnswer(2,false)">E</button>
+<button onclick="checkAnswer(2,true)">C</button>
+<button onclick="checkAnswer(2,false)">Y</button>
+</div>
+<div id="result2" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 3: What does this sign represent?</h3>
+<img src="page3n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(3,false)">Bad</button>
+<button onclick="checkAnswer(3,true)">Nice</button>
+<button onclick="checkAnswer(3,false)">Sad</button>
+<button onclick="checkAnswer(3,false)">Happy</button>
+</div>
+<div id="result3" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 4: What does this sign represent?</h3>
+<img src="page4n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(4,false)">2</button>
+<button onclick="checkAnswer(4,false)">5</button>
+<button onclick="checkAnswer(4,true)">3</button>
+<button onclick="checkAnswer(4,false)">4</button>
+</div>
+<div id="result4" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 5: What does this sign represent?</h3>
+<img src="page5n.jpeg">
+<div class="options">
+<button onclick="checkAnswer(5,true)">A</button>
+<button onclick="checkAnswer(5,false)">B</button>
+<button onclick="checkAnswer(5,false)">C</button>
+<button onclick="checkAnswer(5,false)">D</button>
+</div>
+<div id="result5" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 6: What does this sign represent?</h3>
+<img src="page6.jpeg">
+<div class="options">
+<button onclick="checkAnswer(6,false)">3</button>
+<button onclick="checkAnswer(6,false)">4</button>
+<button onclick="checkAnswer(6,true)">5</button>
+<button onclick="checkAnswer(6,false)">9</button>
+</div>
+<div id="result6" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 7: What does this sign represent?</h3>
+<img src="page7.jpeg">
+<div class="options">
+<button onclick="checkAnswer(7,false)">2</button>
+<button onclick="checkAnswer(7,false)">4</button>
+<button onclick="checkAnswer(7,false)">9</button>
+<button onclick="checkAnswer(7,true)">8</button>
+</div>
+<div id="result7" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 8: What does this sign represent?</h3>
+<img src="page8.jpeg">
+<div class="options">
+<button onclick="checkAnswer(8,true)">10</button>
+<button onclick="checkAnswer(8,false)">4</button>
+<button onclick="checkAnswer(8,false)">11</button>
+<button onclick="checkAnswer(8,false)">9</button>
+</div>
+<div id="result8" class="result"></div>
+</div>
+
+<div class="question">
+<h3>Question 9: What does this sign represent?</h3>
+<img src="page9.jpeg">
+<div class="options">
+<button onclick="checkAnswer(9,false)">3</button>
+<button onclick="checkAnswer(9,false)">4</button>
+<button onclick="checkAnswer(9,true)">1</button>
+<button onclick="checkAnswer(9,false)">9</button>
+</div>
+<div id="result9" class="result"></div>
+</div>
+
+<button id="showBtn" onclick="showResult()">Show Result</button>
+<button id="restartBtn" onclick="restartTest()">Restart</button>
+
+<div id="finalResult" class="resultBox"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+let score=0
+let answered={}
+
+function saveResult(language, score){
+fetch("http://localhost/save_result.php", {
+method: "POST",
+headers: {"Content-Type": "application/x-www-form-urlencoded"},
+body: "language=" + language + "&score=" + score
+})
+}
+
+function goBack(){
+location.href="practice.html"
+}
+
+function checkAnswer(q,isCorrect){
+if(answered[q]) return
+answered[q]=true
+
+let r=document.getElementById("result"+q)
+
+if(isCorrect){
+r.innerHTML="✅ Correct"
+r.style.color="green"
+score++
+}else{
+r.innerHTML="❌ Wrong"
+r.style.color="red"
+}
+}
+
+function showResult(){
+
+let text=""
+let className=""
+
+if(score>=8){
+text="🌟 Excellent Work!"
+className="excellent"
+confetti()
+}
+else if(score>=5){
+text="👍 Good Progress!"
+className="good"
+}
+else{
+text="📚 Keep Practicing!"
+className="practice"
+}
+
+let box=document.getElementById("finalResult")
+box.className="resultBox "+className
+box.innerHTML="Your Score: "+score+" / 9 <br><br>"+text
+
+saveResult("English", score)
+}
+
+function restartTest(){
+score=0
+answered={}
+
+document.getElementById("finalResult").innerHTML=""
+
+for(let i=1;i<=9;i++){
+let r=document.getElementById("result"+i)
+if(r) r.innerHTML=""
+}
+
+window.scrollTo(0,0)
+}
+
+</script>
+
+</body>
+</html>
