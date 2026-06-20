@@ -1,2 +1,1 @@
-# deaf-and-mute-communication-system
-This project helps deaf and mute users communicate effectively through a user-friendly web application, and the main aim is to reduces the communication gap between normal peoples and disable persons.
+Video files are not included in this repository due to GitHub size limits.
